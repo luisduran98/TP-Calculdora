@@ -35,6 +35,7 @@ from funciones_matematicas.matematica import *
 
 flag_primer_operando = False
 flag_segundo_operando = False
+flag_factorial = False
 resultado = 0
 parametro_uno = None
 parametro_dos = None
@@ -75,6 +76,7 @@ while True:
                           case "1":
                                 if flag_primer_operando and flag_segundo_operando:
                                     resultado = suma(primer_operando, segundo_operando)
+                                    flag_factorial = False
                                     break
                                 if flag_primer_operando and not flag_segundo_operando:
                                     limpiar()
@@ -89,6 +91,7 @@ while True:
                           case "2":
                                 if flag_primer_operando and flag_segundo_operando:
                                     resultado = resta(primer_operando, segundo_operando)
+                                    flag_factorial = False
                                     break
                                 if flag_primer_operando and not flag_segundo_operando:
                                     limpiar()
@@ -104,6 +107,7 @@ while True:
                                 if flag_primer_operando and flag_segundo_operando:
                                     try:
                                         resultado = division(primer_operando, segundo_operando)
+                                        flag_factorial = False
                                         break
                                     except ZeroDivisionError as error:
                                         limpiar()
@@ -123,6 +127,7 @@ while True:
                           case "4":
                                 if flag_primer_operando and flag_segundo_operando:
                                     resultado = multiplicar(primer_operando, segundo_operando)
+                                    flag_factorial = False
                                     break
                                 if flag_primer_operando and not flag_segundo_operando:
                                     limpiar()
@@ -138,6 +143,7 @@ while True:
                                 if flag_primer_operando and flag_segundo_operando:
                                     valor_factorial_uno = factorial(primer_operando)
                                     valor_factorial_dos = factorial(segundo_operando)
+                                    flag_factorial = True
                                     break
                                 if flag_primer_operando and not flag_segundo_operando:
                                     limpiar()
@@ -153,25 +159,29 @@ while True:
                                 break
         case "4":
             if flag_primer_operando and flag_segundo_operando:
+                if flag_factorial:
+                    limpiar()
+                    print(f"El Valor de A = {valor_factorial_uno} y el valor de B = {valor_factorial_dos} ")
+                    pausar()
+                    continue
+
                 if resultado:
                     limpiar()
                     print(resultado)
                     pausar()
                     continue
-                if valor_factorial_dos and valor_factorial_uno:
-                    limpiar()
-                    print(f"El Valor de A = {valor_factorial_uno} y el valor de B = {valor_factorial_dos} ")
-                    pausar()
-                    continue
+
                 else:
                     limpiar()
                     print("Necesitas seleccionar alguna operacion para poder mostrar los resultados")
                     pausar()
+                
             if flag_primer_operando and not flag_segundo_operando:
                 limpiar()
                 print("Para poder avanzar te hace falta el segundo operador y seleccionar una operacion")
                 pausar()
-            else: 
+
+            if not flag_primer_operando and  not flag_segundo_operando:
                 limpiar()
                 print("te faltan los dos operadores y seleccionar una operacion")
                 pausar()
